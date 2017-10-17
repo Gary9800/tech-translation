@@ -54,13 +54,13 @@
 
 ![7](./img/a-crash-course-in-memory-management/03_07-768x829.png)
 
-虽然在源代码中，变量自增看起来像一步操作，但当你查看编译的代码时，它并不是一个单一的操作。
+虽然在源代码中，变量自增运算看起来像一步操作，但当你查看编译后的代码时会发现，它并不是一个单步操作。
 
 在CPU级别，加法运算需要三条指令。这是因为计算机具有长期存储器和短期存储器。
 
 ![8](./img/a-crash-course-in-memory-management/03_08-768x521.png)
 
-所有线程共享长期存储器。但是短期存储器（寄存器）不共享。
+所有线程共享长期存储器。但短期存储器（寄存器）是不共享的。
 
 每个线程需要先从内存中把值放入短期存储器。然后对其进行计算。最后，把计算后的值返回给长期存储器。
 
@@ -80,7 +80,7 @@
 
 ![12](./img/a-crash-course-in-memory-management/03_12-768x280.png)
 
-使用原子操作，变量自增代码写起来会有所不同。
+使用原子操作，自增运算代码写起来会有所不同。
 
 ![13](./img/a-crash-course-in-memory-management/03_13-768x241.png)
 
@@ -196,7 +196,7 @@ Atomics 尝试解决这些问题。使用 Atomic 时，就像将代码分开放�
 * [Atomics.load](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Atomics/load)
 * [Atomics.store](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Atomics/store)
 
-`Atomics.store` 能确保：在源代码中它之前的变量都更新完成后再将变量的值返回内存中。即使非原子指令会被重新排序，也不会被移动到 `Atomics.store` 下面。
+`Atomics.store` 能确保：在代码中它之前的变量都更新完成后再将变量的值返回内存中。即使非原子指令会被重新排序，也不会被移动到 `Atomics.store` 下面。
 
 `Atomics.load` 能确保在它之后的变量，要在它获取了变量的值之后再赋值给变量。同样的，即使非原子指令被重新排序，也不会被移动到 `Atomics.load` 的前面。
 
